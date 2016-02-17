@@ -14,7 +14,7 @@ public class Main{
 
     public static void main(String[] args) {
         Topology topologia = new Topology(700, 600);   // creación de la topología
-        topologia.setDefaultNodeModel(NodeIni.class);
+        topologia.setDefaultNodeModel(NodeNeighbors.class);
 
         NodeNeighbors[] nodos = new NodeNeighbors[NUM_NODOS];// Array que contendrá los nodos creados
 

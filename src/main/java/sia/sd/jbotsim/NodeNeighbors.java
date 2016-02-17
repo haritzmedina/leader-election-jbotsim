@@ -12,6 +12,7 @@ public class NodeNeighbors extends Node {
 
     Timer TempoEnvioAlive;                      // Temporizador para el envío periódico de ALIVEs
     Timer TempoActualizarVecindad;              // Temporizador para la actualización periódica de la vecindad
+    Integer leaderId = -1;
 
     // Código que se ejecutará al crear el objeto (método con el mismo nombre que la clase)
     public NodeNeighbors(){
@@ -41,6 +42,16 @@ public class NodeNeighbors extends Node {
                 this.setColor(Color.red);
             }
         }
+        // Get lowest neighbour ID
+        this.leaderId = this.vecindad.obtenerVecinoConMenorId();
+        // If itself is lower than rest of neighbours, set itself as leader
+        if(this.leaderId==null || this.getID()<this.leaderId){
+            this.leaderId = this.getID();
+        }
+        // Set blue color if itself is leader
+        if(this.leaderId==this.getID()){
+            this.setColor(Color.cyan);
+        }
         this.ActualizarToolTip();
     }
     public void onMessage(Message msg) {
@@ -51,7 +62,7 @@ public class NodeNeighbors extends Node {
     }
 
     private void ActualizarToolTip(){
-        String texto = "Id: " + this.getID() + ". Vecinos: " + this.vecindad.imprimir();
+        String texto = "Id: " + this.getID() + ". Vecinos: " + this.vecindad.imprimir() + " Lider: "+this.leaderId;
         this.setState(texto);
     }
 
@@ -116,6 +127,20 @@ class Vecindad{
         for (NodoVecino vecino : NodosVecinosParaEliminar)
             this.NodosVecinos.removeElement(vecino);
     }
+
+    public Integer obtenerVecinoConMenorId(){
+        Integer lider = null;
+        for(int i=0;i<this.NodosVecinos.size();i++){
+            if(lider==null){
+                lider = this.NodosVecinos.get(i).id;
+            }
+            else if(lider>this.NodosVecinos.get(i).id){
+                lider = this.NodosVecinos.get(i).id;
+            }
+        }
+        return lider;
+    }
+
     public String imprimir() {
         String texto = "";
         for (NodoVecino Vecino : NodosVecinos) {
