@@ -16,12 +16,12 @@ public class Main{
         Topology topologia = new Topology(700, 600);   // creación de la topología
         topologia.setDefaultNodeModel(NodeIni.class);
 
-        NodeNeighbours[] nodos = new NodeNeighbours[NUM_NODOS];// Array que contendrá los nodos creados
+        NodeNeighbors[] nodos = new NodeNeighbors[NUM_NODOS];// Array que contendrá los nodos creados
 
         int [] coordenadas = new int[2];      // Array auxiliar para calcular las coordenadas de cada nodo
 
         for (int i = 0; i < NUM_NODOS; i++) {
-            nodos[i] = new NodeNeighbours();          // Creación del nodo
+            nodos[i] = new NodeNeighbors();          // Creación del nodo
             obtenerCoordenadasCirculo(i,NUM_NODOS,coordenadas);
             nodos[i].setLocation(coordenadas[0],coordenadas[1]);
             topologia.addNode(nodos[i]);      // Añadir el nodo a la topología
