@@ -1,6 +1,5 @@
-package sia.sd.jbotsim;
+package sia.sd.jbotsim.neighbours;
 
-import jbotsim.Node;
 import jbotsim.Topology;
 import jbotsim.ui.JViewer;
 

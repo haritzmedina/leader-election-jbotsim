@@ -1,4 +1,4 @@
-package sia.sd.jbotsim;
+package sia.sd.jbotsim.neighbours;
 
 import jbotsim.Message;
 import jbotsim.Node;

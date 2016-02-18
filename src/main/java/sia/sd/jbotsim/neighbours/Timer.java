@@ -1,4 +1,4 @@
-package sia.sd.jbotsim;
+package sia.sd.jbotsim.neighbours;
 
 // Class to implement a timer which allows to measure a given time.
 // Functions:
