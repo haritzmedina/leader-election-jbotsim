@@ -48,6 +48,19 @@ public class NodeExchangingAlives extends Node {
     		System.out.println("Nodo " + this.id + " has " + this.PI.getNumberAliveProcesses() + " neighbours " + this.PI.getListAliveProcesses());
     		this.updateState();
     	}
+
+        Integer piLowestId = this.PI.getLowestProcessId();
+        if(piLowestId==null){
+            this.leader = this.id;
+        }
+        else if(this.id < piLowestId){
+            this.leader = this.id;
+        }
+        else{
+            this.leader = piLowestId;
+        }
+
+        this.updateState();
     }
 
     private void EnviarMensajeALIVE(){
@@ -59,16 +72,7 @@ public class NodeExchangingAlives extends Node {
 
     public void onMessage(Message msg) {
     	ContentMessage contenidoMensaje = (ContentMessage) msg.getContent();
-        Integer piLowestId = this.PI.getLowestProcessId();
-        if(piLowestId==null){
-            this.leader = this.id;
-        }
-        else if(this.id < piLowestId){
-            this.leader = this.id;
-        }
-        else{
-            this.leader = piLowestId;
-        }
+
         if (contenidoMensaje.type == ContentMessage.ALIVE) {
             NodeExchangingAlives sender = (NodeExchangingAlives) msg.getSender();
         	this.PI.updateReception(sender.getId());
