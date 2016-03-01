@@ -3,6 +3,8 @@ package com.haritzmedina.sia.jbotsim;
 import jbotsim.Message;
 import jbotsim.Node;
 
+import java.awt.*;
+
 /**
  * Created by Haritz Medina on 01/03/2016.
  */
@@ -10,6 +12,7 @@ import jbotsim.Node;
 public class NodeExchangingAlivesLeaderEfficient extends Node {
 
     int ID = -1;
+    int leader = -1;
 
     private TickTimer timerSendingALIVEs;
     private InfoProcesses PI;
@@ -38,14 +41,21 @@ public class NodeExchangingAlivesLeaderEfficient extends Node {
                 this.updateState();
             }
         }
+
+        this.leader = this.PI.getMinimumID();
+        setColor(this.ID == this.leader? Color.blue:Color.green);
+        this.setState("Nodo " + this.ID + " Leader:" + this.leader);
+
     }
 
     private void EnviarMensajeALIVE(){
-        ContentMessage content = new ContentMessage();
-        content.type = ContentMessage.ALIVE;
-        content.processSender = this.ID;
-        this.sendAll(new Message(content));
-        Main.writeLog("N " + this.ID + " sent an ALIVE message");
+        if(this.ID == this.leader){
+            ContentMessage content = new ContentMessage();
+            content.type = ContentMessage.ALIVE;
+            content.processSender = this.ID;
+            this.sendAll(new Message(content));
+            Main.writeLog("N " + this.ID + " sent an ALIVE message");
+        }
     }
 
     public void onMessage(Message msg) {

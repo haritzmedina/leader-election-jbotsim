@@ -1,3 +1,5 @@
 rootProject.name = 'jbotsim'
 
 include 'jbotsim-ejercicio1'
+include 'jbotsim-ejercicio2'
+
