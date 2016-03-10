@@ -7,7 +7,7 @@ public class Main {
 
     static int ticket = 0;
 
-    static final int INITIAL_NUM_NODES = 1;
+    static final int INITIAL_NUM_NODES = 2;
     public static Topology topologia;
     public static final int DEFAULT_TIME_SENDING_ALIVE = 100;
     public static final int DEFAULT_TIME_WAITING_ALIVE = 100;
